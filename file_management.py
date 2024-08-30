@@ -66,7 +66,8 @@ def save_csv(number_list, filename):
     return 'file saved'
 
 
-def path_to_forward_slashes(directory_path):
+def back_to_forward_slash(directory_path):
+        '''A function that replaces backward slashes with forward ones in a string'''
         return directory_path.replace('\\', '/')
 
 
