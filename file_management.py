@@ -14,22 +14,22 @@ def make_dir_ifnot(direc):
     return 
 
 
-def list_of_fullpath(folder):
+def list_of_fullpath(folder, extension = '.png'):
 
     '''A function that returns a list of full path of the files in the input path'''
 
-    file_list = [f for f in listdir(folder) if isfile(join(folder, f))]
+    file_list = [f for f in listdir(folder) if isfile(join(folder, f)) and f.endswith(extension)]
     fullpath =[]
     for file in file_list:
         full = os.path.join(folder, file)
         fullpath.append(full)
     return fullpath
 
-def list_of_filenames(folder):
+def list_of_filenames(folder, extension = '.png'):
 
     '''A function that returns a list of file names (without full path) in the input folder path'''
 
-    file_list = [f for f in listdir(folder) if isfile(join(folder, f))]
+    file_list = [f for f in listdir(folder) if isfile(join(folder, f)) and f.endswith(extension)]
     return file_list
 
 #a = list_of_fullpath('E:/Physics year 3/BSc Project/Code/Yolov8/Greenhouse-cracks-11/valid/images/')
