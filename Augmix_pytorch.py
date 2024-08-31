@@ -7,6 +7,8 @@ from torch.utils.data import DataLoader
 from PIL import Image
 import matplotlib.pyplot as plt
 from file_management import list_of_fullpath, list_of_filenames, back_to_forward_slash
+import argparse
+import os
 
 def load_img(img_path):
     #Load Img with PIL package
@@ -41,7 +43,6 @@ def save_img(aug_tensor, outdir, save_name):
     # img_saved.save('./output_img.png')
     return 
 
-
 def process_one_img(in_dir, out_dir, pipeline, save_name):
     img = load_img(in_dir)
     aug_tensor = pipeline(img)
@@ -55,42 +56,24 @@ def process_all_img(in_folder, out_folder, pipeline, save_name_list):
         process_one_img(in_file, out_folder, pipeline, save_name)
     return 
 
-#%%
-input_dir = "E:/XJTLU intern/2249501_XiaohanXu_Datasets/5_class_roboflow/photo"
-all_file_paths = list_of_fullpath(input_dir, extension='.JPG')
-all_file_name = list_of_filenames(input_dir, extension='.JPG')
 
-output_dir = "E:/XJTLU intern/2249501_XiaohanXu_Datasets/AugMix_5class"
-print(all_file_name)
+def main(input_dir, output_dir):
+    all_file_paths = list_of_fullpath(input_dir, extension='.JPG')
+    all_file_name = list_of_filenames(input_dir, extension='.JPG')
 
-#%%
-aug_pipline = AugMix_pip()
-process_all_img(all_file_paths, output_dir, aug_pipline, all_file_name)
+    aug_pipline = AugMix_pip()
+    process_all_img(all_file_paths, output_dir, aug_pipline, all_file_name)
+    return 
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Process images with AugMix pipeline.")
+    parser.add_argument("input_dir", type=str)
+    parser.add_argument("output_dir", type=str)
+    args = parser.parse_args()
 
-#Upgrade the functions for operation on a list of files 
-# def load_imgs(img_path_list):
-#     '''Loading images from a folder'''
-#     list_of_img = []
-#     for img_path in img_path_list:
-#         list_of_img.append(load_img(img_path))
-#     return list_of_img
-
-# def apply_aug_on_list(pipline, img_list):
-#     aug_tensor_list =[]
-#     tensor_iterator = iter(img_list)
-#     for i in range(0, len(img_list)):
-#         aug_tensor_lst.append(pipline(next(tensor_iterator)))
-#     # for item in img_list:
-#     #     aug_tensor_list.append(pipline(item))
-#         # print(item)
-#     return aug_tensor_list
-
-# def tensors2imgs(outdir, aug_tensor_list, save_name_list):
-#     '''A function that saves a list of tensors as png images'''
-#     for i in range(0, len(aug_tensor_list)):
-#         save_img(aug_tensor_list[i], outdir, save_name_list[i])
-#     return 
+#$indir = "E:\XJTLU intern\2249501_XiaohanXu_Datasets\5_class_roboflow\photo"
+#$outdir = "E:\XJTLU intern\2249501_XiaohanXu_Datasets\AugMix_5class"
+#python .\AugMix.py  indir outdir
 
 
 #Show image
@@ -102,3 +85,4 @@ process_all_img(all_file_paths, output_dir, aug_pipline, all_file_name)
 # to_PIL = v2.ToPILImage()
 # img_saved = to_PIL(aug_tensor)
 # img_saved.save('output_img.png')
+
