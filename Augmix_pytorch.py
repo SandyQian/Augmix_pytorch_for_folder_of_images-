@@ -46,7 +46,7 @@ def save_img(aug_tensor, outdir, save_name):
 def process_one_img(in_dir, out_dir, pipeline, save_name):
     img = load_img(in_dir)
     aug_tensor = pipeline(img)
-    saved_img = save_img(aug_tensor, output_dir, save_name)
+    saved_img = save_img(aug_tensor, out_dir, save_name)
     return 
 
 def process_all_img(in_folder, out_folder, pipeline, save_name_list):
@@ -70,6 +70,8 @@ if __name__ == "__main__":
     parser.add_argument("input_dir", type=str)
     parser.add_argument("output_dir", type=str)
     args = parser.parse_args()
+
+    main(args.input_dir, args.output_dir)
 
 #$indir = "E:\XJTLU intern\2249501_XiaohanXu_Datasets\5_class_roboflow\photo"
 #$outdir = "E:\XJTLU intern\2249501_XiaohanXu_Datasets\AugMix_5class"
