@@ -73,11 +73,6 @@ if __name__ == "__main__":
 
     main(args.input_dir, args.output_dir)
 
-#$indir = "E:\XJTLU intern\2249501_XiaohanXu_Datasets\5_class_roboflow\photo"
-#$outdir = "E:\XJTLU intern\2249501_XiaohanXu_Datasets\AugMix_5class"
-#python .\AugMix.py  indir outdir
-
-
 #Show image
 # plt.imshow(aug_tensor.permute(1, 2, 0))
 # plt.axis('off')  # Turn off axis labels
